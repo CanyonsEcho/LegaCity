@@ -1,6 +1,8 @@
 # LegaCity
 Open Source Launcher for Minecraft Legacy Console Edition
 
+![Launcher main menu screenshot](https://github.com/CanyonsEcho/LegaCity/blob/master/readmeassets/launcherss.png?raw=true)
+
 Built with VS 2026 using .NET and Avalonia UI for SmartCMD's MinecraftConsoles repo
 Compatible with Windows 7 SP1 and up (don't know about mac or linux)
 
