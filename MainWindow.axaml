@@ -1,0 +1,257 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+        x:Class="LegaCity.MainWindow"
+        Title="LegaCity Launcher"
+        Width="900" Height="600"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen">
+
+    <!-- fontdeez -->
+    <Window.Resources>
+        <FontFamily x:Key="MinecraftFont">avares://LegaCity/Assets/mac's Minecraft.ttf#mac's Minecraft</FontFamily>
+        <FontFamily x:Key="MinecraftBoldFont">avares://LegaCity/Assets/mac's Minecraft Bold.ttf#mac's Minecraft Bold</FontFamily>
+    </Window.Resources>
+
+    <Grid Background="#0a0a0a">
+        <DockPanel Background="#0a0a0a">
+
+            <!-- sidebar -->
+            <Border DockPanel.Dock="Left" Width="72" Background="#111111"
+                    BorderBrush="#2a2a2a" BorderThickness="0,0,1,0">
+                <StackPanel Spacing="4" Margin="0,8">
+
+                    <Button x:Name="HomeButton" Click="OnTabButtonClick" Tag="home"
+                            Background="Transparent" BorderThickness="0"
+                            Padding="0" Height="64"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                            ToolTip.Tip="Home">
+                        <Image Source="avares://LegaCity/Assets/home.png" Width="36" Height="36" />
+                    </Button>
+
+                    <Button x:Name="VersionsButton" Click="OnTabButtonClick" Tag="versions"
+                            Background="Transparent" BorderThickness="0"
+                            Padding="0" Height="64"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                            ToolTip.Tip="Versions">
+                        <Image Source="avares://LegaCity/Assets/versions.png" Width="36" Height="36" />
+                    </Button>
+
+                    <Button x:Name="SettingsButton" Click="OnTabButtonClick" Tag="settings"
+                            Background="Transparent" BorderThickness="0"
+                            Padding="0" Height="64"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                            ToolTip.Tip="Settings">
+                        <Image Source="avares://LegaCity/Assets/settings.png" Width="36" Height="36" />
+                    </Button>
+
+                </StackPanel>
+            </Border>
+
+            <!-- actual stuff -->
+            <Grid x:Name="ContentGrid">
+
+                <!-- home -->
+                <Grid x:Name="HomeTab">
+                    <Rectangle Fill="#1a1a1a" />
+                    <Image Source="avares://LegaCity/Assets/panorama.png"
+                           Stretch="UniformToFill" />
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#88000000" Offset="0" />
+                                <GradientStop Color="#22000000" Offset="0.4" />
+                                <GradientStop Color="#99000000" Offset="1" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="48">
+                        <Image Source="avares://LegaCity/Assets/legacitylogo.png"
+                               Width="480" Height="96" />
+                        <Button x:Name="PlayButton" Click="OnPlayClick"
+                                Background="#55AA00"
+                                Foreground="White"
+                                FontSize="22"
+                                FontFamily="{StaticResource MinecraftBoldFont}"
+                                BorderBrush="#3d7a00"
+                                BorderThickness="0,0,0,4"
+                                Padding="80,16"
+                                HorizontalAlignment="Center"
+                                CornerRadius="3">
+                            PLAY
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <!-- versions -->
+                <Grid x:Name="VersionsTab" IsVisible="False">
+                    <Rectangle Fill="#1a1a1a" />
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <ImageBrush Source="avares://LegaCity/Assets/dirt.png"
+                                        TileMode="Tile"
+                                        DestinationRect="0,0,64,64"
+                                        Opacity="0.2" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Spacing="20"
+                                    Width="480"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,40">
+
+                            <!-- cmd version stuff -->
+                            <StackPanel Spacing="12" HorizontalAlignment="Center">
+                                <TextBlock Text="Client Version (SmartCMD fork provided by GitHub)"
+                                           Foreground="#aaaaaa"
+                                           FontSize="12"
+                                           FontFamily="{StaticResource MinecraftFont}"
+                                           TextAlignment="Center" />
+                                <TextBlock x:Name="VersionText"
+                                           Text="Installed"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="{StaticResource MinecraftFont}"
+                                           TextAlignment="Center" />
+                                <Button x:Name="UpdateButton" Click="OnUpdateClick"
+                                        Background="#4CAF50"
+                                        Foreground="White"
+                                        FontSize="14"
+                                        FontFamily="{StaticResource MinecraftFont}"
+                                        BorderBrush="#388E3C"
+                                        BorderThickness="0,0,0,3"
+                                        Padding="40,12"
+                                        HorizontalAlignment="Center"
+                                        CornerRadius="3">
+                                    Reinstall
+                                </Button>
+                            </StackPanel>
+
+                            <!-- custom version stuff -->
+                            <StackPanel Spacing="12" HorizontalAlignment="Center">
+                                <TextBlock Text="Use a custom download (must have Minecraft.Client executable):"
+                                           Foreground="#aaaaaa"
+                                           FontSize="12"
+                                           FontFamily="{StaticResource MinecraftFont}"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center" />
+                                <TextBox x:Name="CustomDownloadUrlInput"
+                                         Background="#2a2a2a"
+                                         Foreground="White"
+                                         FontFamily="{StaticResource MinecraftFont}"
+                                         FontSize="12"
+                                         Padding="10,8"
+                                         BorderBrush="#444444"
+                                         BorderThickness="1"
+                                         CornerRadius="3"
+                                         Watermark="Enter URL to .zip file" />
+                                <Button x:Name="CustomDownloadButton" Click="OnCustomDownloadClick"
+                                        Background="#2196F3"
+                                        Foreground="White"
+                                        FontSize="14"
+                                        FontFamily="{StaticResource MinecraftFont}"
+                                        BorderBrush="#1565C0"
+                                        BorderThickness="0,0,0,3"
+                                        Padding="40,12"
+                                        HorizontalAlignment="Center"
+                                        CornerRadius="3">
+                                    Download
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+                <!-- settings -->
+                <Grid x:Name="SettingsTab" IsVisible="False">
+                    <Rectangle Fill="#1a1a1a" />
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <ImageBrush Source="avares://LegaCity/Assets/dirt.png"
+                                        TileMode="Tile"
+                                        DestinationRect="0,0,64,64"
+                                        Opacity="0.2" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+
+                    <StackPanel Spacing="24"
+                                Width="480"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+
+                        <TextBlock Text="Settings"
+                                   Foreground="White"
+                                   FontSize="20"
+                                   FontFamily="{StaticResource MinecraftBoldFont}"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,8" />
+
+                        <!-- fullscreen trigger -->
+                        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                            <TextBlock Text="Fullscreen"
+                                       Foreground="#cccccc"
+                                       FontSize="13"
+                                       FontFamily="{StaticResource MinecraftFont}"
+                                       VerticalAlignment="Center" />
+                            <CheckBox x:Name="FullscreenToggle"
+                                      Grid.Column="1"
+                                      IsChecked="False"
+                                      Foreground="White" />
+                        </Grid>
+
+                        <!-- name field -->
+                        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                            <TextBlock Text="Username"
+                                       Foreground="#cccccc"
+                                       FontSize="13"
+                                       FontFamily="{StaticResource MinecraftFont}"
+                                       VerticalAlignment="Center" />
+                            <TextBox x:Name="UsernameInput"
+                                     Grid.Column="1"
+                                     Background="#2a2a2a"
+                                     Foreground="White"
+                                     FontFamily="{StaticResource MinecraftFont}"
+                                     FontSize="13"
+                                     Padding="10,8"
+                                     Width="200"
+                                     BorderBrush="#444444"
+                                     BorderThickness="1"
+                                     CornerRadius="3"
+                                     Text="Steve" />
+                        </Grid>
+
+                        <!-- setting save -->
+                        <Button x:Name="SaveSettingsButton" Click="OnSaveSettingsClick"
+                                Background="#4CAF50"
+                                Foreground="White"
+                                FontSize="13"
+                                FontFamily="{StaticResource MinecraftFont}"
+                                BorderBrush="#388E3C"
+                                BorderThickness="0,0,0,3"
+                                Padding="30,10"
+                                HorizontalAlignment="Center"
+                                CornerRadius="3">
+                            Save Settings
+                        </Button>
+
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+        </DockPanel>
+
+        <!-- container for noticfichnia -->
+        <StackPanel x:Name="NotificationContainer"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,16,16"
+                    Spacing="8"
+                    MaxWidth="380"
+                    IsHitTestVisible="False" />
+    </Grid>
+</Window>
